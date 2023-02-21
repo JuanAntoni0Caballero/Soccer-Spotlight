@@ -4,4 +4,34 @@
     <h1>Teams</h1>
 
     <a href="/players-details">Teams details</a>
+
+    <div class="row">
+
+        {{#each teams}}
+
+        <div class="col-3 p-2">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="d-flex col-8">
+                            <h5 class="card-title align-self-center">{{team.name}}</h5>
+                        </div>
+                        <div class="col-4">
+                            <img src="{{team.logo}}" alt="{{team.name}} Logo">
+                        </div>
+                    </div>
+                    <span>
+                    </span>
+                    <hr>
+                    <p class="card-subtitle mb-2 text-muted">Ciudad: {{venue.city}}</p>
+                    <p class="card-subtitle mb-2 text-muted">Estadio: {{venue.name}}</p>
+                    <a href="/teams/{{team.id}}" class="card-link">Details</a>
+                </div>
+            </div>
+
+        </div>
+
+        {{/each}}
+    </div>
 </div>

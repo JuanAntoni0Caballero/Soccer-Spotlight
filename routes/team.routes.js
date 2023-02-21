@@ -7,21 +7,22 @@ const footballApi = new ApiService()
 
 
 
-router.get('/teams', (req, res, next) => {
+router.get('/', (req, res, next) => {
 
     footballApi
         .getAllTeams()
-        .then(teams => {
-            console.log(teams)
-            res.render('info/teams-list'), { teams }
-        })
+        // .sort()
+        .then(teams => res.render('info/teams-list', { teams }))
         .catch(err => next(err))
 
 
 })
 
 
-router.get('/teams-details', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
+
+    const { id } = req.params
+
 
     res.render('info/teams-details')
 
