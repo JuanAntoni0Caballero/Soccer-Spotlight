@@ -4,11 +4,19 @@ const { userIsAdmin } = require('../utils')
 const router = express.Router()
 const Comment = require('../models/Comment.model')
 const User = require('../models/User.model')
+const ApiService = require('../services/API-Football.services')
+const footballApi = new ApiService()
 
 
 
 
 router.get('/', (req, res, next) => {
+
+
+    // footballApi
+    //     .getAllMatches()
+    //     .then(response => res.render('info/fixtures-details', { matches: response.data }))
+    //     .catch(err => next(err))
 
     res.render('info/fixtures-list')
 
@@ -17,8 +25,20 @@ router.get('/', (req, res, next) => {
 
 router.get('/details', (req, res, next) => {
 
-    res.render('info/fixtures-details')
+    Comment
 
+        .find()
+        .sort({ createdAt: -1 })
+        .then(comments => res.render('info/fixtures-details', { comments }))
+        .catch(err => next(err))
+
+
+})
+
+
+router.get('/', (req, res, next) => {
+
+    console.log('el comment', comment)
 })
 
 

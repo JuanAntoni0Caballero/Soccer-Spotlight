@@ -2,12 +2,21 @@ const express = require('express')
 const { isLoggedIn } = require('../middleware/route-guards')
 const { userIsAdmin } = require('../utils')
 const router = express.Router()
+const ApiService = require('../services/API-Football.services')
+const footballApi = new ApiService()
 
 
 
 router.get('/teams', (req, res, next) => {
 
-    res.render('info/teams-list')
+    footballApi
+        .getAllTeams()
+        .then(teams => {
+            console.log(teams)
+            res.render('info/teams-list'), { teams }
+        })
+        .catch(err => next(err))
+
 
 })
 
