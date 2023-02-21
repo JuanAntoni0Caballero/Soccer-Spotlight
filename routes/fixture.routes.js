@@ -51,7 +51,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
 
-    console.log('el comment', comment)
 })
 
 
