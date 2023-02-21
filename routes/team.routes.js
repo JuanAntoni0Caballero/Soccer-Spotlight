@@ -15,6 +15,14 @@ router.get('/', (req, res, next) => {
         .then(teams => res.render('info/teams-list', { teams }))
         .catch(err => next(err))
 
+    footballApi
+        .getAllTeams()
+        .then(teams => {
+            console.log(teams)
+            res.render('info/teams-list'), { teams }
+        })
+        .catch(err => next(err))
+
 
 })
 

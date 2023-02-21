@@ -6,7 +6,7 @@ class ApiService {
 
     constructor() {
         this.api = axios.create({
-            baseURL: 'https://api-football-v1.p.rapidapi.com/v3/',
+            baseURL: ' https://api-football-v1.p.rapidapi.com/v3/',
             headers: {
                 'X-RapidAPI-Key': API_KEY,
                 'X-RapidAPI-Host': API_HOST
