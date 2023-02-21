@@ -25,10 +25,12 @@ router.get('/', (req, res, next) => {
 
 router.get('/details', (req, res, next) => {
 
+
     Comment
 
         .find()
         .sort({ createdAt: -1 })
+        .populate('owner')
         .then(comments => res.render('info/fixtures-details', { comments }))
         .catch(err => next(err))
 
@@ -38,7 +40,6 @@ router.get('/details', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
 
-    console.log('el comment', comment)
 })
 
 
