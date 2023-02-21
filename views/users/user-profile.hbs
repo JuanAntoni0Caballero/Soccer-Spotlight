@@ -1,18 +1,26 @@
 <div class="container mt-3">
 
     <div class="row g-0">
-        <div class="col-md-4">
-            <img id='userImg' src="{{user.avatar}}" alt="{{user.username}}">
+        <div class="col-md-4 p-5">
+            <div id="userImg">
+                <img class="rounded-4" src="{{avatar}}" alt="{{username}}">
+            </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 p-5">
             <div class="card-body">
-                <h2 class="card-title">{{user.username}}</h2>
+                <h2 class="card-title">Hello: {{username}}</h2>
                 <hr>
-                <p class="card-text">{{user.email}}</p>
+                <p class="card-text">Email: {{email}}</p>
+                <p class="card-text">Birthday: {{birthday}}</p>
             </div>
         </div>
     </div>
 
-    <a href="/user" class="btn btn-dark">Back to list</a>
+    <div class="d-grid justify-content-center mt-3">
+
+        <a href="/users/profile/edit" class="btn btn-warning">Edit information</a>
+
+    </div>
+
 
 </div>
