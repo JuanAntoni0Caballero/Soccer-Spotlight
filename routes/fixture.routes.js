@@ -2,7 +2,8 @@ const express = require('express')
 const { isLoggedIn } = require('../middleware/route-guards')
 const { userIsAdmin } = require('../utils')
 const router = express.Router()
-const comments = require('../models/Comments.model')
+const Comment = require('../models/Comment.model')
+const User = require('../models/User.model')
 
 
 
@@ -14,7 +15,7 @@ router.get('/', (req, res, next) => {
 })
 
 
-router.get('/:match_id', (req, res, next) => {
+router.get('/details', (req, res, next) => {
 
     res.render('info/fixtures-details')
 
@@ -22,19 +23,21 @@ router.get('/:match_id', (req, res, next) => {
 
 
 
-router.get('/create', (req, res) => {
+router.get('/create', (req, res, next) => {
     res.render('info/fixtures-details')
 })
 
 
-router.post('/create', (req, res) => {
+router.post('/create', (req, res, next) => {
 
 
     const { title, comment } = req.body
 
-    comments
-        .create({ title, comment })
-        .then(elm => res.redirect(`/fixtures-details`))
+    const { _id: owner } = req.session.currentUser
+
+    Comment
+        .create({ title, comment, owner })
+        .then(elm => res.redirect(`/matches/details`))
         .catch(err => next(err))
 })
 

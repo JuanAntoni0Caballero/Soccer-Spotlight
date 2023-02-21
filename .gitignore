@@ -6,13 +6,3 @@ npm-debug.log
 
 # Environment Variables should NEVER be published
 .env
-
-public 
-
-images
-
-*.mp4
-
-*.mov
-
-*.avif
