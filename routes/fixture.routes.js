@@ -36,16 +36,6 @@ router.get('/details', (req, res, next) => {
 })
 
 
-router.get('/', (req, res, next) => {
-
-        .find()
-        .sort({ createdAt: -1 })
-        .then(comments => res.render('info/fixtures-details', { comments }))
-        .catch(err => next(err))
-
-
-})
-
 
 router.get('/', (req, res, next) => {
 
