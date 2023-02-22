@@ -1,11 +1,34 @@
 <div class="container">
 
-    <div>
-        <h1>Next matches</h1>
+    <h1>Next matches</h1>
 
-        <a href="/matches/details">Matches details</a>
-    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Home</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col">Away</th>
+            </tr>
+        </thead>
+        <tbody>
 
+            {{#each matches}}
+            <tr>
+                <td>{{fixture.date}}</td>
+                <td>{{teams.home.name}}</td>
+                <td><img class="object-fit-contain" src="{{teams.home.logo}}" alt="{{teams.home.name}} Logo"></td>
+                <td>{{goals.home}}</td>
+                <td>-</td>
+                <td>{{goals.away}}</td>
+                <td><img class="object-fit-contain" src="{{teams.away.logo}}" alt="{{teams.away.name}} Logo"></td>
+                <td>{{teams.away.name}}</td>
+            </tr>
+            {{/each}}
 
+        </tbody>
+    </table>
 
 </div>

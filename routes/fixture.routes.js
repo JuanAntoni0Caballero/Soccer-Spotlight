@@ -12,16 +12,31 @@ const footballApi = new ApiService()
 router.get('/', (req, res, next) => {
 
 
-    // footballApi
-    //     .getAllMatches()
-    //     .then(response => res.render('info/fixtures-details', { matches: response.data }))
-    //     .catch(err => next(err))
+    footballApi
+        .getAllMatches()
+        .then(response => {
+            const matches = response.data.response.sort((matchA, matchB) => {
 
-    res.render('info/fixtures-list')
+                const dateA = matchA.fixture.date
+                const dateB = matchB.fixture.date
+
+                if (dateA < dateB) {
+                    return 1
+                } else if (dateA > dateB) {
+                    return -1
+                } else {
+                    return 0
+                }
+            })
+
+            res.render('info/fixtures-list', { matches })
+        })
+        .catch(err => next(err))
 
 })
 
 
+//Match details
 router.get('/details', (req, res, next) => {
 
     Comment
@@ -38,12 +53,12 @@ router.get('/', (req, res, next) => {
 
 })
 
-
+//Comment on match --> form render
 router.get('/create', (req, res, next) => {
     res.render('info/fixtures-details')
 })
 
-
+//Comment on match --> form handler
 router.post('/create', (req, res, next) => {
 
     const { title, comment } = req.body

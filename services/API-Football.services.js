@@ -14,8 +14,8 @@ class ApiService {
         })
     }
 
-    getAllMatches = () => {
-        return this.api.get('/matches')
+    getAllMatches = (year = 2022) => {
+        return this.api.get(`/fixtures?league=140&season=${year}`)
     }
 
     getAllTeams = (year = 2022) => {
