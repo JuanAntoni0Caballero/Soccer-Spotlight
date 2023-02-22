@@ -25,7 +25,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/details', (req, res, next) => {
 
-
     Comment
 
         .find()
@@ -33,7 +32,6 @@ router.get('/details', (req, res, next) => {
         .populate('owner')
         .then(comments => res.render('info/fixtures-details', { comments }))
         .catch(err => next(err))
-
 
 })
 
