@@ -21,7 +21,7 @@ module.exports = app => {
 
     //Teams routes
     const teamRoutes = require("./team.routes.js")
-    app.use("/", teamRoutes)
+    app.use("/teams", teamRoutes)
 
 
     //League routes

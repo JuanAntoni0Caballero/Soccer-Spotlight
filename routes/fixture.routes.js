@@ -34,7 +34,6 @@ router.get('/details', (req, res, next) => {
         .then(comments => res.render('info/fixtures-details', { comments }))
         .catch(err => next(err))
 
-
 })
 
 
