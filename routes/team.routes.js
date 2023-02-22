@@ -12,7 +12,23 @@ router.get('/', (req, res, next) => {
     footballApi
         .getAllTeams()
         // .sort()
-        .then(teams => res.render('info/teams-list', teams.data.response))
+        //.then(teams => res.send(teams.data.response))
+        .then(response => {
+            const teams = response.data.response.sort((teamA, teamB) => {
+
+                const nameA = teamA.team.name
+                const nameB = teamB.team.name
+
+                if (nameA < nameB) {
+                    return -1
+                } else if (nameA > nameB) {
+                    return 1
+                } else {
+                    return 0
+                }
+            })
+            res.render('info/teams-list', { teams })
+        })
         .catch(err => next(err))
 
 })
