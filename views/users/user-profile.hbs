@@ -3,7 +3,7 @@
     <div class="row g-0">
         <div class="col-md-4 p-5">
             <div id="userImg">
-                <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
+                <img class="rounded-circle object-fit-cover userImg " src="{{avatar}}" alt="{{username}}">
             </div>
         </div>
         <div class="col-md-8 p-5">
@@ -28,7 +28,7 @@
                         <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
 
                     </div>
-                    <form action="profile/{{_id}}/deletFriend" method="post">
+                    <form action="/users/profile/{{_id}}/deletFriend" method="post">
                         <button type="submit" class="btn btn-search mb-2"> Delet friend</button>
                     </form>
 

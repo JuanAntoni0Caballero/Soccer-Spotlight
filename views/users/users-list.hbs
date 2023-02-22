@@ -10,21 +10,25 @@
         <div class="col-md-4">
 
 
-            <div class="card mb-3">
+            <div class="card mb-3 p-2">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
+                    <div class="col-md-4 d-flex">
+                        <img class="rounded-circle object-fit-cover userImg align-self-center" src="{{avatar}}"
+                            alt="{{username}}">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{username}}</h5>
 
                             <p class="card-text">{{email}}</p>
-                            <p class="card-text"> <a href="users/profile/{{_id}}"> Details </a></p>
+                            <div class="d-flex">
+                                <a class="btn btn-search mb-2" href="users/profile/{{_id}}"> Details </a>
 
-                            <form action="users/{{_id}}/addFriend" method="post">
-                                <button type="submit" class="btn btn-search mb-2"> Add to friends </button>
-                            </form>
+                                <form action="users/{{_id}}/addFriend" method="post">
+                                    <button type="submit" class="btn btn-search mb-2"> Add to friends </button>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

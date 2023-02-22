@@ -101,6 +101,7 @@ router.post('/profile/:friend_id/deletFriend', isLoggedIn, (req, res, next) => {
     const { friend_id } = req.params
     const user_id = req.session.currentUser._id
 
+    console.log({ friend_id, user_id })
     const promises = [User.findByIdAndUpdate(user_id, { $pull: { friends: friend_id } }),
     User.findByIdAndUpdate(friend_id, { $pull: { friends: user_id } })]
 
