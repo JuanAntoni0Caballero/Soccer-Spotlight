@@ -15,15 +15,6 @@ router.get('/', (req, res, next) => {
         .then(teams => res.render('info/teams-list', { teams }))
         .catch(err => next(err))
 
-    footballApi
-        .getAllTeams()
-        .then(teams => {
-            console.log(teams)
-            res.render('info/teams-list'), { teams }
-        })
-        .catch(err => next(err))
-
-
 })
 
 
@@ -31,8 +22,11 @@ router.get('/:id', (req, res, next) => {
 
     const { id } = req.params
 
-
-    res.render('info/teams-details')
+    footballApi
+        .getOneTeam(id)
+        // .then(team => res.send(team))
+        .then(team => res.render('info/teams-details', team))
+        .catch(err => next(err))
 
 })
 
