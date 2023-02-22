@@ -1,6 +1,6 @@
 const isLoggedIn = (req, res, next) => {
 
-    req.session.currentUser ? next() : res.render('/login', { errorMessage: 'Log in to continue' })
+    req.session.currentUser ? next() : res.render('auth/login', { errorMessage: 'Log in to continue' })
 
 }
 
