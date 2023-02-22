@@ -13,14 +13,18 @@
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img id='userImg' src="{{avatar}}" alt="{{username}}">
+                        <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{username}}</h5>
 
                             <p class="card-text">{{email}}</p>
-                            <p class="card-text"> <a href="user/profile/{{_id}}"> Details </a></p>
+                            <p class="card-text"> <a href="users/profile/{{_id}}"> Details </a></p>
+
+                            <form action="users/{{_id}}/addFriend" method="post">
+                                <button type="submit" class="btn btn-search mb-2"> Add to friends </button>
+                            </form>
                         </div>
                     </div>
                 </div>

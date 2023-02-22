@@ -2,18 +2,19 @@ const { Schema, model } = require("mongoose");
 
 const commentSchema = new Schema(
     {
-        title: {
-            type: String
-        },
+
         comment: {
-            type: String
+            type: String,
+            trim: true,
+            minlength: 1,
+            maxlenghth: 200,
         },
         owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
 
-        match:{
+        match: {
             type: String,
         }
     },

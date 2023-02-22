@@ -37,7 +37,13 @@ const userSchema = new Schema(
     dreamTeam: {
       type: Schema.Types.ObjectId,
       ref: 'DreamTeam'
-    }
+    },
+    favoriteTeams: [String],
+    
+    friends: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }]
   },
   {
     timestamps: true

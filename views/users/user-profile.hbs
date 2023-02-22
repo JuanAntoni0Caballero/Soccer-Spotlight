@@ -3,7 +3,7 @@
     <div class="row g-0">
         <div class="col-md-4 p-5">
             <div id="userImg">
-                <img class="rounded-4" src="{{avatar}}" alt="{{username}}">
+                <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
             </div>
         </div>
         <div class="col-md-8 p-5">
@@ -12,6 +12,30 @@
                 <hr>
                 <p class="card-text">Email: {{email}}</p>
                 <p class="card-text">Birthday: {{birthday}}</p>
+                <hr>
+                <p>Friends:</p>
+
+                <div class="row">
+                    {{#each friends}}
+
+
+                    <div class="col-2">
+                        <p class="card-text"> {{username}}</p>
+
+                    </div>
+                    <div class="col-2">
+
+                        <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
+
+                    </div>
+                    <form action="profile/{{_id}}/deletFriend" method="post">
+                        <button type="submit" class="btn btn-search mb-2"> Delet friend</button>
+                    </form>
+
+                    {{/each}}
+
+                </div>
+
             </div>
         </div>
     </div>
