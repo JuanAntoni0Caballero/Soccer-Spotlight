@@ -11,18 +11,9 @@ router.get('/', (req, res, next) => {
 
     footballApi
         .getAllTeams()
-<<<<<<< HEAD
         // .sort()
         .then(teams => res.render('info/teams-list', { teams }))
         .catch(err => next(err))
-=======
-        .then(teams => {
-            console.log(teams)
-            res.render('info/teams-list'), { teams }
-        })
-        .catch(err => next(err))
-
->>>>>>> 884c595 (API)
 
 })
 
