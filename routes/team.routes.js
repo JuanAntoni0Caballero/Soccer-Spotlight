@@ -11,18 +11,18 @@ router.get('/', (req, res, next) => {
 
     footballApi
         .getAllTeams()
+<<<<<<< HEAD
         // .sort()
         .then(teams => res.render('info/teams-list', { teams }))
         .catch(err => next(err))
-
-    footballApi
-        .getAllTeams()
+=======
         .then(teams => {
             console.log(teams)
             res.render('info/teams-list'), { teams }
         })
         .catch(err => next(err))
 
+>>>>>>> 884c595 (API)
 
 })
 
@@ -31,8 +31,11 @@ router.get('/:id', (req, res, next) => {
 
     const { id } = req.params
 
-
-    res.render('info/teams-details')
+    footballApi
+        .getOneTeam(id)
+        // .then(team => res.send(team))
+        .then(team => res.render('info/teams-details', team))
+        .catch(err => next(err))
 
 })
 

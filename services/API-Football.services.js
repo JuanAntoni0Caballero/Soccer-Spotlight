@@ -23,9 +23,9 @@ class ApiService {
             .then(teams => teams.data.response)
     }
 
-    getOneTeams = (year = 2022, teamId) => {
+    getOneTeam = (teamId, year = 2022) => {
         return this.api.get(`/teams/statistics?league=140&season=${year}&team=${teamId}`)
-            .then(teams => teams.data.response)
+            .then(team => team.data.response)
     }
 
 

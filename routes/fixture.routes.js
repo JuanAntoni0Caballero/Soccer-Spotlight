@@ -25,7 +25,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/details', (req, res, next) => {
 
-
     Comment
 
         .find()
@@ -35,6 +34,7 @@ router.get('/details', (req, res, next) => {
         .catch(err => next(err))
 
 })
+
 
 
 router.get('/', (req, res, next) => {
