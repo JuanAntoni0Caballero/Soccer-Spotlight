@@ -26,6 +26,9 @@ class ApiService {
         return this.api.get(`/teams/statistics?league=140&season=${year}&team=${teamId}`)
     }
 
+    getLeagueStandings = () => {
+        return this.api.get()
+    }
 
 }
 
