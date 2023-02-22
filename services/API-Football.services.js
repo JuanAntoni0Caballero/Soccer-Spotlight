@@ -20,12 +20,10 @@ class ApiService {
 
     getAllTeams = (year = 2022) => {
         return this.api.get(`/teams?league=140&season=${year}`)
-            .then(teams => teams.data.response)
     }
 
     getOneTeam = (teamId, year = 2022) => {
         return this.api.get(`/teams/statistics?league=140&season=${year}&team=${teamId}`)
-            .then(team => team.data.response)
     }
 
 

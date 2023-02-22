@@ -9,7 +9,6 @@ const footballApi = new ApiService()
 
 
 
-
 router.get('/', (req, res, next) => {
 
 
@@ -32,15 +31,12 @@ router.get('/details', (req, res, next) => {
         .populate('owner')
         .then(comments => res.render('info/fixtures-details', { comments }))
         .catch(err => next(err))
-
 })
-
 
 
 router.get('/', (req, res, next) => {
 
 })
-
 
 
 router.get('/create', (req, res, next) => {
@@ -50,9 +46,7 @@ router.get('/create', (req, res, next) => {
 
 router.post('/create', (req, res, next) => {
 
-
     const { title, comment } = req.body
-
     const { _id: owner } = req.session.currentUser
 
     Comment

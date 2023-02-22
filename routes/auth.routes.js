@@ -27,7 +27,6 @@ router.post('/signup', isLoggedOut, uploaderMiddleware.single('avatar'), (req, r
     }
 
     // Call password validation here before hashing it
-
     bcrypt
         .genSalt(saltRounds)
         .then(salt => bcrypt.hash(userPwd, salt))
@@ -39,7 +38,6 @@ router.post('/signup', isLoggedOut, uploaderMiddleware.single('avatar'), (req, r
 
 
 //Log in form handler
-
 router.get('/login', isLoggedOut, (req, res, next) => {
     res.render('auth/user-login')
 })
