@@ -13,6 +13,8 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
     User
         .find({ role: 'user' })
+        // select
+        // sort
         .then(users => res.render('users/users-list', { users }))
         .catch(err => next(err))
 })
@@ -21,7 +23,8 @@ router.get('/', isLoggedIn, (req, res, next) => {
 // Profile owner profile
 router.get('/profile', isLoggedIn, (req, res, next) => {
 
-    const id = req.session.currentUser._id
+    const { _id: id } = req.session.currentUser
+
     User
         .findById(id)
         .then(user => res.render('users/user-profile', user))
@@ -29,29 +32,19 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 })
 
 //Edit info form render
-
 router.get('/profile/edit', (req, res, next) => {
     res.render('users/edit-user', { user: req.session.currentUser })
 })
 
 //Edit info form handler
-
 router.post('/profile/edit', uploaderMiddleware.single('avatar'), (req, res, next) => {
 
     let { email, username, userPwd, birthday } = req.body
     const { _id: id } = req.session.currentUser
 
-    let avatar = ''
+    let avatar = req.file ? req.file.path : req.session.currentUser.avatar
 
-    if (req.file) {
-        avatar = req.file.path
-    } else {
-        avatar = req.session.currentUser.avatar
-        console.log('No hay regfile y este es el avatar', avatar);
-    }
-
-    if (birthday === '') {
-        console.log('bday is working')
+    if (!birthday) {
         birthday = req.session.currentUser.birthday
     }
 
@@ -63,6 +56,4 @@ router.post('/profile/edit', uploaderMiddleware.single('avatar'), (req, res, nex
 
 
 
-
 module.exports = router
-

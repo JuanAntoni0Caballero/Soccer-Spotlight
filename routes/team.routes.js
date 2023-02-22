@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
     footballApi
         .getAllTeams()
         // .sort()
-        .then(teams => res.render('info/teams-list', { teams }))
+        .then(teams => res.render('info/teams-list', teams.data.response))
         .catch(err => next(err))
 
 })
@@ -25,7 +25,7 @@ router.get('/:id', (req, res, next) => {
     footballApi
         .getOneTeam(id)
         // .then(team => res.send(team))
-        .then(team => res.render('info/teams-details', team))
+        .then(team => res.render('info/teams-details', team.data.response))
         .catch(err => next(err))
 
 })

@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/players', (req, res, next) => {
 
-    res.render('info//players-list')
+    res.render('info/players-list')
 
 })
 
