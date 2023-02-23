@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container mt-3">
 
-    <h1>Next matches</h1>
+    <h1>Last 10 matches</h1>
 
     <table class="table table-hover align-middle text-center">
         <thead>
@@ -17,7 +17,42 @@
         </thead>
         <tbody>
 
-            {{#each matches}}
+            {{#each matches.lastMatches}}
+            <tr>
+                <td>{{fixture.date}}</td>
+                <td>{{teams.home.name}}</td>
+                <td><img class="object-fit-contain matchLogo" src="{{teams.home.logo}}" alt="{{teams.home.name}} Logo">
+                </td>
+                <td>{{goals.home}}</td>
+                <td>-</td>
+                <td>{{goals.away}}</td>
+                <td><img class="object-fit-contain matchLogo" src="{{teams.away.logo}}" alt="{{teams.away.name}} Logo">
+                </td>
+                <td>{{teams.away.name}}</td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+
+    <h1>Next 10 matches</h1>
+
+    <table class="table table-hover align-middle text-center">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Home</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col">Away</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#each matches.nextMatches}}
             <tr>
                 <td>{{fixture.date}}</td>
                 <td>{{teams.home.name}}</td>
