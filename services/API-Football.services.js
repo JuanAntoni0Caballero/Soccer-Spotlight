@@ -18,6 +18,10 @@ class ApiService {
         return this.api.get(`/fixtures?league=140&season=${year}`)
     }
 
+    getOneMatch = (matchId) => {
+        return this.api.get(`/fixtures?id=${matchId}`)
+    }
+
     getAllTeams = (year = 2022) => {
         return this.api.get(`/teams?league=140&season=${year}`)
     }

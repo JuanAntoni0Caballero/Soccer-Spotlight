@@ -3,22 +3,23 @@
     <div class="row justify-content-center">
 
         <div>
-            <h1>Matche details</h1>
+            <h1>Match details</h1>
 
         </div>
 
-
         <div class="col-md-6">
+
+
 
             <h1>New Comment</h1>
             <hr>
 
 
-            <form action="/matches/create" method="POST">
+            <form action="/matches/{{match.fixture.id}}/create" method="POST">
 
                 <div class="mb-6">
                     <label for="comment" class="form-label">Comment</label>
-                    <input type="text" class="form-control" id="comment" name="comment" value="{{comment}}">
+                    <input type="text" class="form-control" id="comment" name="comment">
                 </div>
 
                 <div class="d-grid mt-2">
@@ -32,7 +33,7 @@
         <div>
 
             <h1>Comments!</h1>
-            {{#each comments}}
+            {{#each comment}}
             <div class="card">
                 <div class="card-header">
                     Usuario: {{owner.username}}

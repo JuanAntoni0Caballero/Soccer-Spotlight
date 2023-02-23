@@ -1,3 +1,4 @@
+const { formToJSON } = require('axios')
 const express = require('express')
 const router = express.Router()
 
@@ -60,19 +61,19 @@ router.get('/', (req, res, next) => {
 
 
 //Match details
-router.get('/:id', (req, res, next) => {
+router.get('/:matchId', (req, res, next) => {
 
-    const { id } = req.params
-
+    const { matchId } = req.params
     const promise = [
-        Comment.findById(id), 
-    ]
-    Comment
+        Comment
+            .find({ match: matchId })
+            .sort({ createdAt: -1 })
+            .populate('owner'),
+        footballApi.getOneMatch(matchId)]
 
-        .findById(id)
-        .sort({ createdAt: -1 })
-        .populate('owner')
-        .then(comments => res.render('info/fixtures-details', { comments }))
+    Promise
+        .all(promise)
+        .then(([comment, match]) => res.render('info/fixtures-details', { match: match.data.response[0], comment }))
         .catch(err => next(err))
 })
 
@@ -82,19 +83,21 @@ router.get('/', (req, res, next) => {
 })
 
 //Comment on match --> form render
-router.get('/create', (req, res, next) => {
+router.get('/:matchId/create', (req, res, next) => {
     res.render('info/fixtures-details')
 })
 
 //Comment on match --> form handler
-router.post('/create', (req, res, next) => {
+router.post('/:matchId/create', (req, res, next) => {
 
     const { title, comment } = req.body
+    const { matchId } = req.params
+    console.log('Ths is matchid: ', matchId)
     const { _id: owner } = req.session.currentUser
 
     Comment
-        .create({ title, comment, owner })
-        .then(elm => res.redirect(`/matches/details`))
+        .create({ title, comment, owner, match: matchId })
+        .then(elm => res.redirect(`/matches/${matchId}`))
         .catch(err => next(err))
 })
 
