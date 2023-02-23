@@ -29,7 +29,14 @@
                     <p class="card-subtitle mb-2 text-muted">Estadio: {{venue.name}}</p>
                     <p class="card-subtitle mb-2 text-muted">Capacidad: {{venue.capaity}}</p>
 
-                    <a href="/teams/{{team.id}}" class="card-link">Details</a>
+                    <div class="d-flex">
+                        <a class="btn btn-search mb-2" href="/teams/{{team.id}}" class="card-link">Details</a>
+
+                        <form action="/users/{{team.id}}/addTeam" method="POST">
+                            <button type="submit" class="btn btn-search mb-2"> Add to fav </button>
+                        </form>
+
+                    </div>
                 </div>
             </div>
 

@@ -4,6 +4,9 @@ const router = express.Router()
 const { isLoggedIn } = require('../middleware/route-guards')
 const uploaderMiddleware = require('../middleware/uploader.middleware')
 
+const ApiService = require('../services/API-Football.services')
+const footballApi = new ApiService()
+
 const { userIsAdmin } = require('../utils')
 
 const User = require('../models/User.model')
@@ -27,7 +30,17 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
     User
         .findById(id)
         .populate('friends')
-        .then(user => res.render('users/user-profile', user))
+        .then(user => {
+
+            const promises = user.favoriteTeams.map(elm => footballApi.getOneTeam(elm))
+
+            Promise
+                .all(promises)
+                .then((teams) => {
+                    const myTeams = teams.map(elm => elm.data.response)
+                    res.render('users/user-profile', { user, myTeams })
+                })
+        })
         .catch(err => next(err))
 })
 
@@ -101,9 +114,9 @@ router.post('/profile/:friend_id/deletFriend', isLoggedIn, (req, res, next) => {
     const { friend_id } = req.params
     const user_id = req.session.currentUser._id
 
-    console.log({ friend_id, user_id })
-    const promises = [User.findByIdAndUpdate(user_id, { $pull: { friends: friend_id } }),
-    User.findByIdAndUpdate(friend_id, { $pull: { friends: user_id } })]
+    const promises = [
+        User.findByIdAndUpdate(user_id, { $pull: { friends: friend_id } }),
+        User.findByIdAndUpdate(friend_id, { $pull: { friends: user_id } })]
 
     Promise
         .all(promises)
@@ -114,6 +127,33 @@ router.post('/profile/:friend_id/deletFriend', isLoggedIn, (req, res, next) => {
 
 
 
+
+// Add favorite team
+router.post('/:teamId/addTeam', isLoggedIn, (req, res, next) => {
+
+    const { teamId } = req.params
+    const user_id = req.session.currentUser._id
+
+    User
+        .findByIdAndUpdate(user_id, { $addToSet: { favoriteTeams: teamId } })
+        .then(() => res.redirect('/teams'))
+        .catch(err => next(err))
+
+})
+
+
+
+// Delet favorite team
+router.post('/profile/:teamId/deletTeam', isLoggedIn, (req, res, next) => {
+
+    const { teamId } = req.params
+    const user_id = req.session.currentUser._id
+
+    User
+        .findByIdAndUpdate(user_id, { $pull: { favoriteTeams: teamId } })
+        .then(() => res.redirect(`/users/profile`))
+        .catch(err => next(err))
+})
 
 
 

@@ -3,21 +3,20 @@
     <div class="row g-0">
         <div class="col-md-4 p-5">
             <div id="userImg">
-                <img class="rounded-circle object-fit-cover userImg " src="{{avatar}}" alt="{{username}}">
+                <img class="rounded-circle object-fit-cover userImg " src="{{user.avatar}}" alt="{{user.username}}">
             </div>
         </div>
         <div class="col-md-8 p-5">
             <div class="card-body">
-                <h2 class="card-title">Hello: {{username}}</h2>
+                <h2 class="card-title">Hello: {{user.username}}</h2>
                 <hr>
-                <p class="card-text">Email: {{email}}</p>
-                <p class="card-text">Birthday: {{birthday}}</p>
+                <p class="card-text">Email: {{user.email}}</p>
+                <p class="card-text">Birthday: {{user.birthday}}</p>
                 <hr>
                 <p>Friends:</p>
 
                 <div class="row">
-                    {{#each friends}}
-
+                    {{#each user.friends}}
 
                     <div class="col-2">
                         <p class="card-text"> {{username}}</p>
@@ -30,6 +29,27 @@
                     </div>
                     <form action="/users/profile/{{_id}}/deletFriend" method="post">
                         <button type="submit" class="btn btn-search mb-2"> Delet friend</button>
+                    </form>
+
+                    {{/each}}
+
+                </div>
+
+                <div class="row">
+                    {{#each myTeams}}
+
+
+                    <div class="col-2">
+                        <p class="card-text"> {{team.name}}</p>
+
+                    </div>
+                    <div class="col-2">
+
+                        <img class="rounded-circle object-fit-cover userImg" src="{{team.logo}}" alt="{{team.name}}">
+
+                    </div>
+                    <form action="/users/profile/{{team.id}}/deletTeam" method="post">
+                        <button type="submit" class="btn btn-search mb-2"> Delet Team</button>
                     </form>
 
                     {{/each}}
