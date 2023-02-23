@@ -18,7 +18,8 @@
         <tbody>
 
             {{#each matches.lastMatches}}
-            <tr>
+            <tr onclick="window.location ='/matches/{{fixture.id}}'">
+
                 <td>{{fixture.date}}</td>
                 <td>{{teams.home.name}}</td>
                 <td><img class="object-fit-contain matchLogo" src="{{teams.home.logo}}" alt="{{teams.home.name}} Logo">

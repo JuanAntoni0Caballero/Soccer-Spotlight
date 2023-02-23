@@ -38,10 +38,15 @@ router.get('/:id', (req, res, next) => {
 
     const { id } = req.params
 
-    footballApi
-        .getOneTeam(id)
-        // .then(team => res.send(team))
-        .then(team => res.render('info/teams-details', team.data.response))
+    const promises = [footballApi.getOneTeam(id), footballApi.getAllPlayers(id)]
+
+    Promise
+        .all(promises)
+        .then(([team, allPlayers]) => {
+            (res.render('info/teams-details', { players: allPlayers.data.response, team: team.data.response.team }))
+
+        })
+
         .catch(err => next(err))
 
 })

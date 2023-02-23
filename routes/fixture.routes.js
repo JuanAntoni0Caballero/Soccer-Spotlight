@@ -60,11 +60,16 @@ router.get('/', (req, res, next) => {
 
 
 //Match details
-router.get('/details', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
 
+    const { id } = req.params
+
+    const promise = [
+        Comment.findById(id), 
+    ]
     Comment
 
-        .find()
+        .findById(id)
         .sort({ createdAt: -1 })
         .populate('owner')
         .then(comments => res.render('info/fixtures-details', { comments }))

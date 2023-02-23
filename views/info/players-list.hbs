@@ -1,7 +1,61 @@
 <div class="container">
 
+    <div class="row justify-content-center">
 
-    <h1>Players</h1>
+        <h1>Players</h1>
+        <hr>
 
-    <a href="/players-details">Players details</a>
+        {{#each players}}
+
+        <div class="col-md-4">
+
+
+            <div class="card mb-3 p-2">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex">
+                        <img class="rounded-circle object-fit-cover userImg align-self-center" src="{{player.photo}}"
+                            alt="{{player.name}}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9 d-flex">
+                                    <h5 class="card-title align-self-center ">{{player.name}}</h5>
+
+                                </div>
+                                <div class="col-3">
+
+                                    <img class="object-fit-cover userImg align-self-center"
+                                        src="{{statistics.[0].team.logo}}" alt="{{team.logo}}">
+                                </div>
+                            </div>
+
+                            <p class="card-text">{{player.firstname}} {{player.lastname}}</p>
+                            <div class="d-flex">
+                                <a class="btn btn-search mb-2" href="/players-details/{{_id}}">Players details</a>
+
+
+                                {{!-- <form action="users/{{_id}}/addFriend" method="post">
+                                    <button type="submit" class="btn btn-search mb-2"> Add to friends </button>
+                                </form> --}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        {{/each}}
+
+    </div>
+
+    <hr>
+
+    <a href="/" class="btn btn-dark">Back to start</a>
+
 </div>

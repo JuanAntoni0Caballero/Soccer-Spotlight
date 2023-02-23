@@ -30,6 +30,12 @@ class ApiService {
         return this.api.get()
     }
 
+    getAllPlayers = (teamId, year = 2022) => {
+        return this.api.get(`/players?league=140&season=${year}&team=${teamId}`)
+    }
+
+
+
 }
 
 module.exports = ApiService

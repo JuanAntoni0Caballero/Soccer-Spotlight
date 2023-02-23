@@ -47,26 +47,12 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 
 
 
-// Profile users
-router.get('/profile/:_id', isLoggedIn, (req, res, next) => {
-
-    const { _id: id } = req.params
-    User
-        .findById(id)
-        .populate('friends')
-        .then(user => res.render('users/user-profile', user))
-
-        .catch(err => next(err))
-})
-
-
-
-
-
 //Edit info form render
 router.get('/profile/edit', (req, res, next) => {
     res.render('users/edit-user', { user: req.session.currentUser })
 })
+
+
 
 
 
@@ -87,6 +73,22 @@ router.post('/profile/edit', uploaderMiddleware.single('avatar'), (req, res, nex
         .then(() => res.redirect('/users/profile'))
         .catch(err => next(err))
 })
+
+
+
+
+// Profile users
+router.get('/profile/:_id', isLoggedIn, (req, res, next) => {
+
+    const { _id: id } = req.params
+    User
+        .findById(id)
+        .populate('friends')
+        .then(user => res.render('users/user-profile', user))
+
+        .catch(err => next(err))
+})
+
 
 
 
@@ -118,6 +120,7 @@ router.post('/profile/:friend_id/deletFriend', isLoggedIn, (req, res, next) => {
         User.findByIdAndUpdate(user_id, { $pull: { friends: friend_id } }),
         User.findByIdAndUpdate(friend_id, { $pull: { friends: user_id } })]
 
+        
     Promise
         .all(promises)
         .then(([currentUser, friend]) => res.redirect(`/users/profile`))
