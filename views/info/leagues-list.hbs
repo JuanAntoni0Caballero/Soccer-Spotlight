@@ -1,7 +1,42 @@
-<div class="container">
+<div class="container mt-3">
 
+    <h1>La Liga</h1>
+    <hr>
+    <h2>Standings</h2>
 
-    <h1>Leagues</h1>
+    <table class="table table-hover align-middle text-center mt-3">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">P</th>
+                <th scope="col">Goal</th>
+                <th scope="col">+/-</th>
+                <th scope="col">Pts</th>
+                <th scope="col">W</th>
+                <th scope="col">T</th>
+                <th scope="col">L</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    <a href="/leagues-details">Leagues details</a>
+            {{#each standings}}
+            <tr>
+                <td>{{rank}}.</td>
+                <td>{{team.name}}</td>
+                <td><img class="object-fit-contain matchLogo" src="{{team.logo}}" alt="{{team.name}} logo"></td>
+                <td>{{all.played}}</td>
+                <td> {{all.goals.for}}:{{all.goals.against}}</td>
+                <td>{{goalsDiff}}</td>
+                <td>{{points}}</td>
+                <td>{{all.win}}</td>
+                <td>{{all.draw}}</td>
+                <td>{{all.lose}}</td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+
 </div>

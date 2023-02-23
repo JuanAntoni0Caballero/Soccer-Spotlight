@@ -38,7 +38,11 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
                 .all(promises)
                 .then((teams) => {
                     const myTeams = teams.map(elm => elm.data.response)
-                    res.render('users/user-profile', { user, myTeams })
+                    res.render('users/user-profile', {
+                        user,
+                        myTeams,
+                        isOwner: req.session.currentUser._id === user._id.toString()
+                    })
                 })
         })
         .catch(err => next(err))
@@ -51,11 +55,16 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 router.get('/profile/:_id', isLoggedIn, (req, res, next) => {
 
     const { _id: id } = req.params
+
     User
         .findById(id)
         .populate('friends')
-        .then(user => res.render('users/user-profile', user))
+        .then(user => {
+            res.render('users/user-details', {
+                user: user,
+            })
 
+        })
         .catch(err => next(err))
 })
 
