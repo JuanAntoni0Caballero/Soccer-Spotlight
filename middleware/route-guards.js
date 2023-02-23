@@ -5,20 +5,15 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const isLoggedOut = (req, res, next) => {
-    if (!req.session.currentUser) {
-        next()
-    } else {
-        res.redirect('/')
-    }
+
+    !req.session.currentUser ? next() : res.redirect('/')
+
 }
 
 const checkRole = (...roles) => (req, res, next) => {
 
-    if (roles.includes(req.session.currentUser.role)) {
-        next()
-    } else {
-        res.render('/', { errorMessage: 'You do not have authorization' })
-    }
+    roles.includes(req.session.currentUser.role) ? next() : res.render('/', { errorMessage: 'You do not have authorization' })
+
 }
 
 module.exports = { isLoggedIn, isLoggedOut, checkRole }
