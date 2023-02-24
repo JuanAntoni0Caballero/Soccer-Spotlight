@@ -22,7 +22,7 @@
         <tbody>
 
             {{#each standings}}
-            <tr>
+            <tr onclick="window.location ='/teams/{{team.id}}'">
                 <td>{{rank}}.</td>
                 <td>{{team.name}}</td>
                 <td><img class="object-fit-contain matchLogo" src="{{team.logo}}" alt="{{team.name}} logo"></td>
