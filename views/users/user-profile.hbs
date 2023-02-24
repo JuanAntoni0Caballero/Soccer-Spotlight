@@ -12,48 +12,38 @@
                 <hr>
                 <p class="card-text">Email: {{user.email}}</p>
                 <p class="card-text">Birthday: {{user.birthday}}</p>
-                <hr>
-                <p>Friends:</p>
+
+                <h6 class="fw-bold my-3">Friends:</h6>
 
                 <div class="row">
                     {{#each user.friends}}
 
                     <div class="col-2">
                         <p class="card-text"> {{username}}</p>
-
-                    </div>
-                    <div class="col-2">
-
                         <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
 
+                        <form action="/users/profile/{{_id}}/deletFriend" method="post">
+                            <button type="submit" class="btn btn-danger mt-2 btn-sm">Delete</button>
+                        </form>
                     </div>
-
-                    <form action="/users/profile/{{_id}}/deletFriend" method="post">
-                        <button type="submit" class="btn btn-search mb-2"> Delet friend</button>
-                    </form>
 
                     {{/each}}
 
                 </div>
 
-                <div class="row">
-                    {{#each myTeams}}
+                <h6 class="fw-bold my-3">Favorite teams:</h6>
 
+                <div class="row d-flex">
+                    {{#each myTeams}}
 
                     <div class="col-2">
                         <p class="card-text"> {{team.name}}</p>
+                        <img class="object-fit-cover userImg" src="{{team.logo}}" alt="{{team.name}}">
 
+                        <form action="/users/profile/{{team.id}}/deletTeam" method="post">
+                            <button type="submit" class="btn btn-danger mt-2 btn-sm">Delete</button>
+                        </form>
                     </div>
-                    <div class="col-2">
-
-                        <img class="rounded-circle object-fit-cover userImg" src="{{team.logo}}" alt="{{team.name}}">
-
-                    </div>
-
-                    <form action="/users/profile/{{team.id}}/deletTeam" method="post">
-                        <button type="submit" class="btn btn-search mb-2"> Delet Team</button>
-                    </form>
-
 
                     {{/each}}
 

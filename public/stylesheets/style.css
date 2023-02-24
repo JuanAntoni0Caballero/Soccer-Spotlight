@@ -6,6 +6,10 @@ h1 {
   color: 15px;
 }
 
+.logoImg {
+  height: 40px;
+}
+
 #indexBody {
   position: fixed;
   color: white;
@@ -15,6 +19,16 @@ h1 {
   background-size: cover;
   display: grid;
   place-items: center;
+}
+
+#init {
+  color: rgb(70, 70, 70);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#init p {
+  color: black;
+  font-size: 1.5em;
 }
 
 img {

@@ -1,54 +1,65 @@
-<div class="container">
+<div class="container mt-3">
 
     <div class="row justify-content-center">
 
-        <div>
-            <h1>Match details</h1>
 
+        <h1 class="mb-4">Match details</h1>
+
+        <div class="row justify-content-center text-center p-5">
+            <div class="col-2">
+                <h4 class="h-20">{{match.teams.home.name}}</h4>
+                <img src="{{match.teams.home.logo}}" alt="{{match.teams.home.name}} Logo">
+            </div>
+            <div class="d-flex col-1">
+                <h3 class="align-self-center w-100">{{match.goals.home}}</h3>
+            </div>
+            <div class="d-flex col-1">
+                <h3 class="align-self-center w-100">-</h3>
+            </div>
+            <div class="d-flex col-1">
+                <h3 class="align-self-center w-100">{{match.goals.away}}</h3>
+            </div>
+            <div class="col-2">
+                <h4 class="h-20">{{match.teams.away.name}}</h4>
+                <img src="{{match.teams.away.logo}}" alt="{{match.teams.away.name}} Logo">
+            </div>
         </div>
 
-        <div class="col-md-6">
+        <h5>Comments</h5>
+        <hr>
 
 
-
-            <h1>New Comment</h1>
-            <hr>
-
-
-            <form action="/matches/{{match.fixture.id}}/create" method="POST">
-
-                <div class="mb-6">
-                    <label for="comment" class="form-label">Comment</label>
-                    <input type="text" class="form-control" id="comment" name="comment">
-                </div>
-
-                <div class="d-grid mt-2">
-                    <button type="submit" class="btn btn-dark btn-lg">Create comment</button>
-                </div>
-
-            </form>
-
-        </div>
+        <form action="/matches/{{match.fixture.id}}/create" method="POST">
+            <div class="m-2">
+                <textarea class="form-control" id="comment" name="comment" rows="3"
+                    placeholder="Enter your comment here..."></textarea>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-dark m-2">Create comment</button>
+            </div>
+        </form>
 
         <div>
 
-            <h1>Comments!</h1>
             {{#each comment}}
-            <div class="card">
+            <div class="card m-2">
                 <div class="card-header">
-                    Usuario: {{owner.username}}
+                    <div class="row">
+                        <div class=" d-flex col-11">
+                            <h6 class="card-title align-self-center m-0">Usuario: {{owner.username}}</h6>
+                        </div>
+                        <div class="col-1 "><img class="rounded-circle object-fit-cover userImg" src="{{owner.avatar}}"
+                                alt="{{owner.username}} Logo"></div>
+                    </div>
+
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{comment}}</h5>
+                    <p class=" m-0">{{comment}}</p>
                 </div>
             </div>
-
             {{/each}}
 
         </div>
     </div>
 
-    <hr>
-
-    <a href="/" class="btn btn-dark">Back to start</a>
 </div>

@@ -22,7 +22,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
 })
 
 
-// Profile owner profile
+// Owner profile
 router.get('/profile', isLoggedIn, (req, res, next) => {
 
     const { _id: id } = req.session.currentUser
@@ -49,39 +49,13 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 })
 
 
-
-
-// Profile users
-router.get('/profile/:_id', isLoggedIn, (req, res, next) => {
-
-    const { _id: id } = req.params
-
-    User
-        .findById(id)
-        .populate('friends')
-        .then(user => {
-            res.render('users/user-details', {
-                user: user,
-            })
-
-        })
-        .catch(err => next(err))
-})
-
-
-
-
-
-//Edit info form render
+// Edit info form render
 router.get('/profile/edit', (req, res, next) => {
     res.render('users/edit-user', { user: req.session.currentUser })
 })
 
 
-
-
-
-//Edit info form handler
+// Edit info form handler
 router.post('/profile/edit', uploaderMiddleware.single('avatar'), (req, res, next) => {
 
     let { email, username, userPwd, birthday } = req.body
@@ -100,22 +74,20 @@ router.post('/profile/edit', uploaderMiddleware.single('avatar'), (req, res, nex
 })
 
 
-
-
-// Profile users
+// Users profile
 router.get('/profile/:_id', isLoggedIn, (req, res, next) => {
 
     const { _id: id } = req.params
+
     User
         .findById(id)
         .populate('friends')
-        .then(user => res.render('users/user-profile', user))
-
+        .then(user => {
+            // res.send(user)
+            res.render('users/user-details', { user })
+        })
         .catch(err => next(err))
 })
-
-
-
 
 
 // Add user to friend
@@ -134,7 +106,6 @@ router.post('/:friend_id/addFriend', isLoggedIn, (req, res, next) => {
 })
 
 
-
 // Delet user to friend
 router.post('/profile/:friend_id/deletFriend', isLoggedIn, (req, res, next) => {
 
@@ -145,15 +116,12 @@ router.post('/profile/:friend_id/deletFriend', isLoggedIn, (req, res, next) => {
         User.findByIdAndUpdate(user_id, { $pull: { friends: friend_id } }),
         User.findByIdAndUpdate(friend_id, { $pull: { friends: user_id } })]
 
-        
+
     Promise
         .all(promises)
         .then(([currentUser, friend]) => res.redirect(`/users/profile`))
         .catch(err => next(err))
 })
-
-
-
 
 
 // Add favorite team
@@ -170,7 +138,6 @@ router.post('/:teamId/addTeam', isLoggedIn, (req, res, next) => {
 })
 
 
-
 // Delet favorite team
 router.post('/profile/:teamId/deletTeam', isLoggedIn, (req, res, next) => {
 
@@ -182,8 +149,6 @@ router.post('/profile/:teamId/deletTeam', isLoggedIn, (req, res, next) => {
         .then(() => res.redirect(`/users/profile`))
         .catch(err => next(err))
 })
-
-
 
 
 module.exports = router

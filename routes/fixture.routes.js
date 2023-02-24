@@ -1,5 +1,6 @@
 const { formToJSON } = require('axios')
 const express = require('express')
+const { isLoggedIn } = require('../middleware/route-guards')
 const router = express.Router()
 
 const Comment = require('../models/Comment.model')
@@ -78,17 +79,13 @@ router.get('/:matchId', (req, res, next) => {
 })
 
 
-router.get('/', (req, res, next) => {
-
-})
-
 //Comment on match --> form render
-router.get('/:matchId/create', (req, res, next) => {
+router.get('/:matchId/create', isLoggedIn, (req, res, next) => {
     res.render('info/fixtures-details')
 })
 
 //Comment on match --> form handler
-router.post('/:matchId/create', (req, res, next) => {
+router.post('/:matchId/create', isLoggedIn, (req, res, next) => {
 
     const { title, comment } = req.body
     const { matchId } = req.params

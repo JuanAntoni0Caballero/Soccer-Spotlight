@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container mt-3">
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-start">
 
         <h1>Users List</h1>
         <hr>
@@ -8,7 +8,6 @@
         {{#each users}}
 
         <div class="col-md-4">
-
 
             <div class="card mb-3 p-2">
                 <div class="row g-0">
@@ -21,12 +20,19 @@
                             <h5 class="card-title">{{username}}</h5>
 
                             <p class="card-text">{{email}}</p>
-                            <div class="d-flex">
-                                <a class="btn btn-search mb-2" href="users/profile/{{_id}}"> Details </a>
+                            <div class="d-flex row justify-content-center">
+                                <div class="col-5 mx-1">
+                                    <a class="btn btn-secondary mb-2" href="users/profile/{{_id}}">
+                                        Details </a>
+                                </div>
+                                <div class="col-5 mx-1">
+                                    <form action="users/{{_id}}/addFriend" method="post">
+                                        <button type="submit" class="btn btn-success mb-2"> <img
+                                                src="https://cdn.icon-icons.com/icons2/1744/PNG/512/3643746-add-friend-member-people-plus_113411.png"
+                                                alt="add friend"> </button>
+                                    </form>
+                                </div>
 
-                                <form action="users/{{_id}}/addFriend" method="post">
-                                    <button type="submit" class="btn btn-search mb-2"> Add to friends </button>
-                                </form>
                             </div>
 
                         </div>
@@ -34,17 +40,10 @@
                 </div>
             </div>
 
-
-
-
         </div>
 
         {{/each}}
 
     </div>
-
-    <hr>
-
-    <a href="/" class="btn btn-dark">Back to start</a>
 
 </div>

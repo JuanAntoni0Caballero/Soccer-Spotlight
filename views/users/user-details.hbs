@@ -18,20 +18,16 @@
                 <div class="row">
                     {{#each user.friends}}
 
-                    <div class="col-2">
-                        <p class="card-text"> {{username}}</p>
-
-                    </div>
-                    <div class="col-2">
-
-                        <img class="rounded-circle object-fit-cover userImg" src="{{avatar}}" alt="{{username}}">
-
+                    <div class="col-2 text-center">
+                        <p class="card-text mb-2"> {{this.username}}</p>
+                        <img class="rounded-circle object-fit-cover userImg" src="{{this.avatar}}"
+                            alt="{{this.username}}">
                     </div>
 
-
+                    {{/each}}
                 </div>
 
-                <div class="row">
+                {{!-- <div class="row">
                     {{#each myTeams}}
 
 
@@ -45,19 +41,10 @@
 
                     </div>
 
-                    {{/each}}
+                    {{/each}} --}}
 
                 </div>
-
             </div>
         </div>
     </div>
-
-    <div class="d-grid justify-content-center mt-3">
-
-        <a href="/users/profile/edit" class="btn btn-warning">Edit information</a>
-
-    </div>
-
-
 </div>
